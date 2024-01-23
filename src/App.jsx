@@ -1,5 +1,5 @@
 import {useState } from 'react'
-import { Box, Center, Flex,  Modal,
+import { Box, Container, Flex,  Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
@@ -10,22 +10,21 @@ import { Box, Center, Flex,  Modal,
   ModalCloseButton, useDisclosure, FormControl, FormHelperText, Heading} from "@chakra-ui/react"
 import Sidebar from "./Components/Sidebar"
 import Calculator from './Components/Calculator';
+import History from './Components/History';
 
 function App() {
   const [currPage, setCurrPage] = useState('Calculator');
   const {isOpen, onClose, onOpen} = useDisclosure();
   const [user, setUser] = useState(null);
 
-
-  return (
-    <>
-    <Box w='100%' filter='auto' blur={`${isOpen && '3px'}`}>
-      <Flex>
-          <Sidebar setCurrPage={setCurrPage} handleModalDisplay={onOpen} currUser={user} setUser={setUser}/>
-          {currPage === 'Calculator' && <Calculator/>}
-          {currPage === 'History' && <Center bg='red' h='100vh' w='100%' >
-            </Center>
-          }
+ return (
+  <Container maxW='100vw' ml='0px' p='0px' filter='auto' blur={`${isOpen && '3px'}`}>
+          <Flex>
+          <Sidebar flex="1" setCurrPage={setCurrPage} handleModalDisplay={onOpen} currUser={user} setUser={setUser}/>
+          <Flex flex="7" direction='column' align='center'>
+            {currPage === 'Calculator' && <Calculator/>}
+            {currPage === 'History' && <History/>}
+          </Flex>
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay>
               <ModalContent bg='gray.300' m='auto' color='black'>
@@ -51,12 +50,7 @@ function App() {
               </ModalContent>
             </ModalOverlay>
           </Modal>
-
-          
-      </Flex>
-    </Box>
-    </>
-  )
-}
-
+          </Flex>
+  </Container>
+)}
 export default App

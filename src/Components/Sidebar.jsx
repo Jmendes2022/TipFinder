@@ -8,7 +8,7 @@ export default function Sidebar({setCurrPage, handleModalDisplay, currUser, setU
 
 
     return (
-            <Container bg='blue.600' h='100vh' w='25%' ml='0'>
+            <Container bg='blue.600' h='100vh' maxW='20%' ml='0'>
                 <Flex flexDir='column' alignItems='center' justifyContent='space-between'>
                     <Box>
                         <Text fontSize='1.5rem' textAlign='center' mt='2rem'>{currUser ? `Welcome ${currUser}!` : 'Welcome Guest!' }</Text>
