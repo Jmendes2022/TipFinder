@@ -11,6 +11,27 @@ const theme = extendTheme({
           cursor: 'pointer',
       },
     },
+    lg: {
+        '.Nav-item:hover': {
+            color: 'gray.50',
+            fontSize: '2.1rem',
+            cursor: 'pointer',
+        },
+    },
+    xl: {
+        '.Nav-item:hover': {
+            color: 'gray.50',
+            fontSize: '2.1rem',
+            cursor: 'pointer',
+        },
+    },
+    '2xl': {
+        '.Nav-item:hover': {
+            color: 'gray.50',
+            fontSize: '2.1rem',
+            cursor: 'pointer',
+        },
+    },
     body: {
           fontFamily: `Obitron, sans-serif`,
           color: '#e6e6e6',

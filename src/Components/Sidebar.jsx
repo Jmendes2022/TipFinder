@@ -16,8 +16,8 @@ export default function Sidebar({setCurrPage, handleModalDisplay, currUser, setU
                         <Heading fontSize={{md: '2rem', lg: '2.8rem'}}>TipFinder</Heading>
                     </Box>
                     <UnorderedList mt={{base: '2rem', md: '10rem'}}>
-                            <ListItem mb={{base: '.5rem', md: "1.5rem"}} fontSize={{base: '1.2rem', md: '1.5rem', lg: '1.8rem'}} className="Nav-item" currUser={currUser} onClick={() => setCurrPage("Calculator")}>Tip Calculator</ListItem>
-                            <ListItem fontSize={{base: '1.2rem', md: '1.5rem', lg: '1.8rem'}} className="Nav-item" currUser={currUser} onClick={() => setCurrPage("History")}>Tip History</ListItem>
+                            <ListItem _hover={{"@media(min-width: 62em)": { cursor: 'pointer', fontSize: '2.1rem', color: 'gray.50'},}} mb={{base: '.5rem', md: "1.5rem"}} fontSize={{base: '1.2rem', md: '1.5rem', lg: '1.8rem'}} className="Nav-item" currUser={currUser} onClick={() => setCurrPage("Calculator")}>Tip Calculator</ListItem>
+                            <ListItem _hover={{"@media(min-width: 62em)": { cursor: 'pointer', fontSize: '2.1rem', color: 'gray.50'},}} fontSize={{base: '1.2rem', md: '1.5rem', lg: '1.8rem'}} className="Nav-item" currUser={currUser} onClick={() => setCurrPage("History")}>Tip History</ListItem>
                     </UnorderedList>
                     <Box mt={{base: '0rem',md: '5em'}}>
                         {currUser && <Button colorScheme='blackAlpha' variant='solid' size='lg'>Log Out</Button>}
