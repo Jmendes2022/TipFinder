@@ -35,12 +35,11 @@ const [lowestTip, setLowestTip] = useState(0);
 
 const { isOpen, onOpen, onClose } = useDisclosure();
 const cancelRef = useRef();
-const [selectedData, setSelectedData] = useState();
+const [selectedData, setSelectedData] = useState(null);
 
 useEffect(() => {
     const data = JSON.parse(localStorage.getItem("history")) || [];
     setHistory(data);
-    console.log(data);
 }, [])
 
 
@@ -51,7 +50,7 @@ useEffect(() => {
         const newBillTotalArray = history.map(x => parseFloat(x.billAfterTip));
         const foundGrandTotal = billTotalArray.reduce((acc, curr) => acc + curr, 0);
         const foundAverageBill = foundGrandTotal / billTotalArray.length;
-        const foundAverageTip = (history.map(x => parseFloat(x.tipPercent)).reduce((acc, curr) => acc + curr, 0) / 2);
+        const foundAverageTip = (history.map(x => parseFloat(x.tipPercent)).reduce((acc, curr) => acc + curr, 0) / history.length);
         const billTotalAfterTipArray = history.map(x => parseFloat(x.billAfterTip)); 
         const foundGrandTotalAfterTip = billTotalAfterTipArray.reduce((acc, curr) => acc + curr, 0);
         const foundAverageBillAfterTip = foundGrandTotalAfterTip / billTotalAfterTipArray.length;
@@ -75,23 +74,26 @@ useEffect(() => {
     }
 }, [history])
 
-function handleDelete()
+function handlePromptDelete(key)
 {   
-    if (key === null) {
-        
-    }
-
-    onClose();
-    const newHistory = history.filter(x => x != key);
-    console.log(newHistory);
-
+    setSelectedData(key);
+    onOpen();
 }
 
+function handleDelete()
+{
+    const newHistory = history.filter(x => history.indexOf(x) != selectedData);
+    localStorage.setItem("history", JSON.stringify(newHistory));
+    setHistory(newHistory);
+    onClose();
+}
+
+
     return (
-        <Container bg='white' h='100vh' minW='100%'>
-            <Flex direction='column' justify='flex-start'>
-            <Heading className="header" mt='5rem' >Your Tip History</Heading>
-                <TableContainer mt="8rem" w="70%" ml="auto" mr="auto">
+        <Container bg='white' h='100vh' maxW='100vw'>
+            <Flex direction='column' justify='flex-start' maxW={{md: '60vw', xl: '100vw'}}>
+            <Heading className="header" mt={{base: '2rem', md:'5rem', lg: '3.8rem', xl: '5rem'}} >Your Tip History</Heading>
+                <TableContainer mt={{base: '3rem', md: "3rem", xl: "8rem"}} fontSize={{base: 'sm', md: 'lg', xl: 'x-large'}} maxW={{base: '100%' , md: "100%", xl: '90%'}} ml="auto" mr="auto">
                 <Table variant='simple'>
                     <Thead color='gray.400'>
                     <Tr>
@@ -111,7 +113,7 @@ function handleDelete()
                             <Td>{x.tipPercent ?? ""}</Td>
                             <Td>{x.billAfterTip ?? ""}</Td>
                             <Td>{x.formattedDate ?? ""}</Td>
-                            <Td color="red.600"><FaRegTrashCan cursor="pointer" onClick={() => {setSelectedData(x); handleDelete();}}/></Td>
+                            <Td color="red.600"><FaRegTrashCan cursor="pointer" onClick={() => handlePromptDelete(index)}/></Td>
                         </Tr>
                     )}
                     </Tbody>
@@ -125,12 +127,12 @@ function handleDelete()
                     </Tfoot>
                 </Table>
                 </TableContainer>
-                <Center mt='5rem' color="black">
-                    <SimpleGrid columns={2} spacingX='10em' spacingY='4rem'>
-                        <Text>Most Expensive Bill: ${mostExpensiveBill}</Text>
-                        <Text>Least Expensive Bill: ${leastExpensiveBill}</Text>
-                        <Text>Highest Tip %: {highestTip}</Text>
-                        <Text>Lowest Tip %: {lowestTip}</Text>
+                <Center mt={{base: '5rem', lg: '4.7rem'}} mb='2rem' color="black" maxW={{lg: '100%'}} >
+                    <SimpleGrid columns={{base: 1, md: 2, lg: 2}} textAlign={{lg: 'center'}} spacingX={{md: '4rem', lg: '3em'}} spacingY={{md: '2rem', lg: '2rem'}} m={{lg: 'auto'}}>
+                        <Text textAlign={{base: "center", md: 'auto'}} fontSize={{base: 'lg', xl: 'x-large'}}>Most Expensive Bill: ${mostExpensiveBill}</Text>
+                        <Text textAlign={{base: "center", md: 'auto'}} fontSize={{base: 'lg', xl: 'x-large'}}>Least Expensive Bill: ${leastExpensiveBill}</Text>
+                        <Text textAlign={{base: "center", md: 'auto'}} fontSize={{base: 'lg', xl: 'x-large'}}>Highest Tip %: {highestTip}</Text>
+                        <Text textAlign={{base: "center", md: 'auto'}} fontSize={{base: 'lg', xl: 'x-large'}}>Lowest Tip %: {lowestTip}</Text>
                     </SimpleGrid>
                 </Center>
             </Flex>
@@ -143,7 +145,6 @@ function handleDelete()
                     <AlertDialogBody color="black" fontWeight='bold'>
                     Are you sure? <em><u>This can't be undone!</u></em>
                     </AlertDialogBody>
-
                     <AlertDialogFooter>
                     <Button ref={cancelRef} onClick={onClose}>
                         Cancel

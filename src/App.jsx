@@ -19,9 +19,9 @@ function App() {
 
  return (
   <Container maxW='100vw' ml='0px' p='0px' filter='auto' blur={`${isOpen && '3px'}`}>
-          <Flex>
-          <Sidebar flex="1" setCurrPage={setCurrPage} handleModalDisplay={onOpen} currUser={user} setUser={setUser}/>
-          <Flex flex="7" direction='column' align='center'>
+          <Flex maxW={{base: '100vw'}} direction={{base: "column", md: 'row'}}>
+          <Sidebar flex={"1"} setCurrPage={setCurrPage} handleModalDisplay={onOpen} currUser={user} setUser={setUser}/>
+          <Flex flex="7" direction={{base: 'row', md:'column'}} align='center'>
             {currPage === 'Calculator' && <Calculator/>}
             {currPage === 'History' && <History/>}
           </Flex>
@@ -29,7 +29,7 @@ function App() {
             <ModalOverlay>
               <ModalContent bg='gray.300' m='auto' color='black'>
                 <ModalHeader>
-                  <Heading >Login</Heading>
+                  <Heading>Login</Heading>
                   <ModalCloseButton/>
                 </ModalHeader>
                 <ModalBody>

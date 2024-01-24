@@ -4,11 +4,13 @@ import { extendTheme } from '@chakra-ui/react';
 const theme = extendTheme({
   styles: {
     global: {
-      '.Nav-item:hover': {
+      md: {
+        '.Nav-item:hover': {
           color: 'gray.50',
           fontSize: '2.1rem',
           cursor: 'pointer',
       },
+    },
     body: {
           fontFamily: `Obitron, sans-serif`,
           color: '#e6e6e6',
