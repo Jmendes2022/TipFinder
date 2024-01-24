@@ -2,8 +2,8 @@ import { Heading, Input, Center, FormControl, Box, Button, Flex, Text, Grid, Gri
 import { useEffect, useState } from "react";
 
 export default function() {
-const [tipPercent, setTipPercent] = useState(0);
-const [billTotal, setBillTotal] = useState(0);
+const [tipPercent, setTipPercent] = useState();
+const [billTotal, setBillTotal] = useState();
 const [business, setBusiness] = useState("");
 const [tip, setTip] = useState(0);
 const [billAfterTip, setBillAfterTip] = useState(0);
@@ -13,7 +13,7 @@ useEffect(() => {
     function Calculate()
     {
         const parsedBillTotal = parseFloat(billTotal);
-        const parsedTipPercent = parseFloat(tipPercent);
+        const parsedTipPercent = parseFloat(tipPercent) >= 1 ? parseFloat(tipPercent) / 100 : parseFloat(tipPercent);
 
         if (!isNaN(parsedBillTotal) && !isNaN(parsedTipPercent)) 
         {
