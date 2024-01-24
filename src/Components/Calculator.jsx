@@ -21,6 +21,7 @@ useEffect(() => {
             const calculatedBillAfterTip = parseFloat((parsedBillTotal + calculatedTip).toFixed(2))  
             setTip(calculatedTip);
             setBillAfterTip(calculatedBillAfterTip);
+            setTipPercent(parsedTipPercent);
         };
         console.log(tip);
         console.log(billAfterTip);
@@ -66,7 +67,7 @@ function handleSubmitForm()
                     </GridItem>
                     <GridItem justifySelf='center' w={{base: '80%', xl: '60%'}}>
                         <FormLabel className="label">Tip Percentage</FormLabel>
-                        <Input className="input" type="number" isRequired variant='filled' placeholder=".25" step='0.01' min='.00' max='1'  value={tipPercent} onChange={(e) => setTipPercent(e.target.value)}/>
+                        <Input className="input" type="number" isRequired variant='filled' placeholder=".25" step='0.01' min='.00'  value={tipPercent} onChange={(e) => setTipPercent(e.target.value)}/>
                     </GridItem>
                     <GridItem justifySelf='center' w={{base: '80%', xl: '60%'}}>
                         <FormLabel className="label">Bill Total</FormLabel>
