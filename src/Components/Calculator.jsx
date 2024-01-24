@@ -75,8 +75,8 @@ function handleSubmitForm()
                 </Grid>
                 <Box>
                     <Flex flexDir='column' align='center' mt={{base: '2rem', md: '3rem'}} rowGap={{base: '1rem', md: '2rem'}}>
-                        {tip && billAfterTip && <Text className="text" fontSize={{base: 'lg', md: 'lg', lg: 'x-large'}}>Tip Amount: ${tip}</Text>}
-                        {tip && billAfterTip && <Text className="text" fontSize={{base: 'lg', md: 'lg', lg: 'x-large'}}>New Bill Total: ${billAfterTip < 0 ? "" : billAfterTip}</Text>}
+                        {tip && billAfterTip && <Text className="text" fontSize={{base: 'lg', md: 'lg', lg: 'x-large'}}>Tip Amount: ${tip.toFixed(2)}</Text>}
+                        {tip && billAfterTip && <Text className="text" fontSize={{base: 'lg', md: 'lg', lg: 'x-large'}}>New Bill Total: ${billAfterTip < 0 ? "" : billAfterTip.toFixed(2)}</Text>}
                         <Button colorScheme='blue' variant='solid' type="submit" form='tip-form' w={{lg: '8rem'}}>Save</Button>
                     </Flex>
                 </Box>
