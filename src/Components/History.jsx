@@ -50,14 +50,14 @@ useEffect(() => {
         const newBillTotalArray = history.map(x => parseFloat(x.billAfterTip));
         const foundGrandTotal = billTotalArray.reduce((acc, curr) => acc + curr, 0);
         const foundAverageBill = foundGrandTotal / billTotalArray.length;
-        const foundAverageTip = (history.map(x => parseFloat(x.tipPercent)).reduce((acc, curr) => acc + curr, 0) / history.length);
+        const foundAverageTip = (history.map(x => parseFloat(x.tipInput)).reduce((acc, curr) => acc + curr, 0) / history.length);
         const billTotalAfterTipArray = history.map(x => parseFloat(x.billAfterTip)); 
         const foundGrandTotalAfterTip = billTotalAfterTipArray.reduce((acc, curr) => acc + curr, 0);
         const foundAverageBillAfterTip = foundGrandTotalAfterTip / billTotalAfterTipArray.length;
         const foundMostExpensiveBill = newBillTotalArray.reduce((acc, curr) => curr > acc ? curr : acc, 0);
         const foundLeastExpensiveBill = newBillTotalArray.reduce((acc, curr) => curr < acc ? curr : acc);
-        const foundHighestTip = (history.map(x => parseFloat(x.tipPercent)).reduce((acc, curr) => curr > acc ? curr : acc, 0));
-        const foundLowestTip = (history.map(x => parseFloat(x.tipPercent)).reduce((acc, curr) => curr < acc ? curr : acc));
+        const foundHighestTip = (history.map(x => parseFloat(x.tipInput)).reduce((acc, curr) => curr > acc ? curr : acc, 0));
+        const foundLowestTip = (history.map(x => parseFloat(x.tipInput)).reduce((acc, curr) => curr < acc ? curr : acc));
 
         setLowestTip(parseFloat(foundLowestTip).toFixed(2));
         setHighestTip(parseFloat(foundHighestTip).toFixed(2));
@@ -110,7 +110,7 @@ function handleDelete()
                         <Tr key={index}>
                             <Td>{x.business ?? ""}</Td>
                             <Td>{x.billTotal ?? ""}</Td>
-                            <Td>{x.tipPercent ?? ""}</Td>
+                            <Td>{x.tipInput}</Td>
                             <Td>{x.billAfterTip ?? ""}</Td>
                             <Td>{x.formattedDate ?? ""}</Td>
                             <Td color="red.600"><FaRegTrashCan cursor="pointer" onClick={() => handlePromptDelete(index)}/></Td>

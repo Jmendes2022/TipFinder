@@ -21,10 +21,7 @@ useEffect(() => {
             const calculatedBillAfterTip = parseFloat((parsedBillTotal + calculatedTip).toFixed(2))  
             setTip(calculatedTip);
             setBillAfterTip(calculatedBillAfterTip);
-            setTipPercent(parsedTipPercent);
         };
-        console.log(tip);
-        console.log(billAfterTip);
     }
 
     Calculate();
@@ -38,7 +35,8 @@ function handleSubmitForm()
     historyArray = historyArray ? JSON.parse(historyArray) : [];
     const date = Date.now();
     const formattedDate = new Intl.DateTimeFormat('en-US', { month: '2-digit', day: '2-digit' }).format(date);
-    historyArray = [...historyArray, {business, tipPercent, billTotal, billAfterTip, formattedDate}];
+    const tipInput = parseFloat(tipPercent) >= 1 ? parseFloat(tipPercent) / 100 : parseFloat(tipPercent);
+    historyArray = [...historyArray, {business, tipInput, billTotal, billAfterTip, formattedDate}];
     localStorage.setItem("history", JSON.stringify(historyArray));
     console.log(localStorage.getItem("history"));
 
